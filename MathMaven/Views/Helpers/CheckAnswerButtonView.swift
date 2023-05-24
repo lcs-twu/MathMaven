@@ -25,6 +25,10 @@ struct CheckAnswerButtonView: View {
     // on the original view, so use @Binding
     @Binding var answerCorrect: Bool
 
+    // This value needs to change at the source of truth
+    // on the original view, so use @Binding
+    @Binding var feedback: String
+
     // MARK: Computed properties
     var body: some View {
 
@@ -57,6 +61,9 @@ struct CheckAnswerButtonView: View {
             return
         }
         
+        // This part is for different words to encourage the Grade 3 kid
+        let difference = abs(providedAnswer - correctResponse)
+        
         // Check the provided answer
         if providedAnswer == correctResponse {
             // Celebrate! User's provided answer was correct👍🏼
@@ -64,6 +71,12 @@ struct CheckAnswerButtonView: View {
         } else {
             // An integer was provided, but it's not correct 😭
             answerCorrect = false
+            
+            if difference > 50{
+                feedback = "Don't give up"
+            }else{
+                feedback = "testing 1"
+            }
         }
         
         // Record that the user's answer has been checked
@@ -78,6 +91,7 @@ struct CheckAnswerButtonView_Previews: PreviewProvider {
         CheckAnswerButtonView(input: "7",
                               correctResponse: 7,
                               answerChecked: .constant(false),
-                              answerCorrect: .constant(false))
+                              answerCorrect: .constant(false),
+                              feedback: .constant(""))
     }
 }

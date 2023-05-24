@@ -21,6 +21,7 @@ struct MultiplicationView: View {
     @State var answerCorrect = false
     
     // Encourage the Grade 3 kid
+    @State var feedback = ""
     
     // MARK: Computed properties
 
@@ -85,7 +86,8 @@ struct MultiplicationView: View {
                 CheckAnswerButtonView(input: input,
                                       correctResponse: correctResponse,
                                       answerChecked: $answerChecked,
-                                      answerCorrect: $answerCorrect)
+                                      answerCorrect: $answerCorrect,
+                                      feedback: $feedback)
 
             } else {
                 
